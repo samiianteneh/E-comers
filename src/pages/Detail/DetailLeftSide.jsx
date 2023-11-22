@@ -1,9 +1,10 @@
 import React from "react";
+import { URLST } from "../../constants/urls";
 
 function DetailLeftSide({ image }) {
   return (
     <div className=" ">
-      <img src={"http://" + image}></img>
+      <img src={`${URLST}/${image}`}></img>
     </div>
   );
 }

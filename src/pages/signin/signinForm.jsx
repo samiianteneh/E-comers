@@ -29,7 +29,9 @@ function SigninForm() {
         localStorage.setItem("token", Response.data.token);
         localStorage.setItem("name", Response.data.user.user.name);
         localStorage.setItem("role", Response.data.user.user.role.roleName);
+        localStorage.setItem("userID", Response.data.user.user.id);
         // navigate("/");
+
         window.location.href = "/";
       })
       .catch((err) => {
@@ -73,7 +75,7 @@ function SigninForm() {
           </div>
           <div>
             <input
-              className="w-full h-8 pl-2 border-[1px] border-black rounded bg-white"
+              className="w-full h-8 pl-2 border-[1px] border-black rounded dark:text-black bg-white"
               type="password"
               id="password"
               placeholder="Type here"

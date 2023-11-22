@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { URLST } from "../../constants/urls";
 
 function EachProduct({ title, image, price, id }) {
   const tokens = localStorage.getItem("token");
@@ -11,7 +12,7 @@ function EachProduct({ title, image, price, id }) {
 
         <div className=" text-black font-medium mt-4 mb-4">Image</div>
         <div className=" text-[#5f5f5f] ">
-          <img src={"http://" + image}></img>
+          <img src={`${URLST}/${image}`}></img>
         </div>
         <div className=" mt-4">
           <div className="flex justify-between">

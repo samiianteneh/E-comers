@@ -15,6 +15,7 @@ function Detail() {
     axios
       .get(`${URLST}/product`)
       .then((response) => {
+        // console.log(response.data.product);
         setData(response.data.product);
       })
       .catch((err) => {
@@ -25,32 +26,38 @@ function Detail() {
   const filteredData = data.find((item) => item.id === id);
 
   // console.log("FilteredData", filteredData);
-  console.log(localStorage);
+  // console.log(localStorage);
   return (
-    <>
-      <div className=" pt-24 border-[1px] border-black rounded-xl  mx-32 bg-gray-50">
-        <div className="  border-b-2 border-black">
-          <DetailHeader date={filteredData?.updatedAt} />
-        </div>
-        <div className=" flex bg-white ">
-          <div className=" w-7/12 flex justify-center items-center border-r-2     ">
-            <DetailLeftSide image={filteredData?.image} />
+    <div className="App h-[100vh]">
+      <div className="flex items-center justify-center h-full ">
+        <div className=" pt-24 pb-4  w-3/5  border-[1px] border-gray-300 h-11/12 rounded-xl    dark:bg-gray-800  bg-gray-50">
+          <div className=" border-b-2 border-black dark:bg-gray-700">
+            <DetailHeader date={filteredData?.updatedAt} />
           </div>
-          <div className=" w-5/12 py-5 pr-5 pl-3 ">
-            <DetailRightSide
-              title={filteredData?.productName}
-              description={filteredData?.description}
-              price={filteredData?.price}
-              ratting={filteredData?.ratting}
-              categoryId={filteredData?.categoryId}
-            />
+          <div className=" flex bg-white dark:bg-gray-800 ">
+            <div className=" w-7/12 flex justify-center items-center border-r-2     ">
+              <DetailLeftSide image={filteredData?.image} />
+            </div>
+            <div className=" w-5/12 py-5 pr-5 pl-3 h-full">
+              <DetailRightSide
+                title={filteredData?.productName}
+                description={filteredData?.description}
+                price={filteredData?.price}
+                ratting={filteredData?.ratting}
+                categoryId={filteredData?.categoryId}
+              />
+            </div>
           </div>
-        </div>
-        <div>
-          <DetailBottom />
+
+          <div>
+            <DetailBottom productId={filteredData?.id} />
+          </div>
+          <div className=" border-b-2 mb-3">
+            <></>
+          </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 

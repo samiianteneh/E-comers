@@ -17,30 +17,35 @@ function Header() {
         <Link to={"/"}>E Comerse</Link>.
       </div>
       <div>{tokens && name ? <>{name}</> : <></>}</div>
-      <div>
-        {role === "admin" ? <p>admin</p> : role === "user" ? <p>user</p> : null}
-      </div>
+
       <div className="flex ">
         {tokens && name ? (
           <>
-            <div
-              className=" 
+            {role === "admin" ? (
+              <></>
+            ) : (
+              <>
+                <div
+                  className=" 
         mx-4 bg-blue-700 text-white h-10 w-20 flex items-center 
         justify-center rounded-lg text-lg font-bold"
-            >
-              <button>
-                <Link to={"/Cart"}> cart</Link>
-              </button>
-            </div>
-            <div
-              className=" 
+                >
+                  <button>
+                    <Link to={"/Cart"}> cart</Link>
+                  </button>
+                </div>
+                <div
+                  className=" 
         mx-4 bg-blue-700 text-white h-10 w-20 flex items-center 
         justify-center rounded-lg text-lg font-bold"
-            >
-              <button>
-                <Link to={"/Order"}> Orders</Link>
-              </button>
-            </div>
+                >
+                  <button>
+                    <Link to={"/Order"}> Orders</Link>
+                  </button>
+                </div>
+              </>
+            )}
+
             <div
               className=" 
         mx-4 bg-blue-700 text-white h-10 w-20 flex items-center 
@@ -49,6 +54,8 @@ function Header() {
               <button
                 onClick={() => {
                   localStorage.removeItem("token");
+                  localStorage.removeItem("role");
+                  localStorage.removeItem("name");
                   window.location.href = "/";
                   // Navigate("/");
                 }}
