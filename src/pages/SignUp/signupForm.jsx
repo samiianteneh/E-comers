@@ -14,6 +14,7 @@ function SignupForm() {
   //
 
   const onSubmit = (e) => {
+    // console.log("name", e.name);
     axios
       .post(
         `${URLST}/users`,

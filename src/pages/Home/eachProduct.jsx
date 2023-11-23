@@ -29,7 +29,7 @@ function EachProduct({ title, image, price, id }) {
                       <Link to={`/Detail/${id}`}>Detail</Link>
                     </>
                   ) : (
-                    <div>Detail</div>
+                    <Link to={"/Signin"}>Detail</Link>
                   )}
                 </div>
               </button>

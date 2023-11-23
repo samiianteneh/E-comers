@@ -1,56 +1,52 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
-import { IoHomeOutline } from "react-icons/io5";
-import { CiShoppingCart } from "react-icons/ci";
+
+import {
+  ShoppingCartOutlined,
+  HomeOutlined,
+  PlusCircleOutlined,
+  UnorderedListOutlined,
+} from "@ant-design/icons";
 import { LuPackageOpen } from "react-icons/lu";
-import { MdAddCircleOutline } from "react-icons/md";
-
-function AdminSidebar() {
-  return (
-    <div className="dark:bg-gray-800 bg-white pt-2 my-5 h-full overflow-auto">
-      <div>
-        <NavLink
-          className="py-2  sm:px-3 my-5 px-10 mx-3  rounded gap-3 flex items-center"
-          to="/"
-        >
-          <IoHomeOutline /> Home
-        </NavLink>
-      </div>
-      <div>
-        <NavLink
-          className="py-2  my-5 px-10 mx-3 sm:px-3 rounded gap-3 flex items-center"
-          to="/ManageCatagory"
-        >
-          <CiShoppingCart /> View Catagory
-        </NavLink>
-      </div>
-      <div>
-        <NavLink
-          className="py-2  my-5 px-10 mx-3 sm:px-3 rounded gap-3 flex items-center "
-          to="/AddCatagory"
-        >
-          <CiShoppingCart /> Add Catagory
-        </NavLink>
-      </div>
-
-      <div>
-        <NavLink
-          className="py-2  my-5 px-10 mx-3 sm:px-3 rounded gap-3 flex items-center"
-          to="/ManageProducts"
-        >
-          <LuPackageOpen /> View Product
-        </NavLink>
-      </div>
-      <div>
-        <NavLink
-          className="py-2  my-5 px-10 mx-3 sm:px-3 rounded gap-3 flex items-center"
-          to="/addProduct"
-        >
-          <MdAddCircleOutline /> Add Product
-        </NavLink>
-      </div>
-    </div>
-  );
+import { Menu } from "antd";
+import { useNavigate } from "react-router-dom";
+function getItem(label, key, icon, children, type) {
+  return {
+    key,
+    icon,
+    children,
+    label,
+    type,
+  };
 }
+const items = [
+  getItem("Home", "AdminHome", <HomeOutlined />),
 
+  getItem("Cart", "sub1", <ShoppingCartOutlined />, [
+    getItem("View Cart", "ManageCatagory", <UnorderedListOutlined />),
+    getItem("Add Cart", "AddCatagory", <PlusCircleOutlined />),
+  ]),
+  getItem("Product", "sub2", <LuPackageOpen />, [
+    getItem("View Product", "ManageProducts", <UnorderedListOutlined />),
+    getItem("Add Product", "addProduct", <PlusCircleOutlined />),
+  ]),
+];
+const AdminSidebar = () => {
+  const navigate = useNavigate();
+
+  const onClick = (e) => {
+    // console.log("click ", e);
+    // console.log(e.key);
+    navigate(`/${e.key}`);
+  };
+  return (
+    <Menu
+      onClick={onClick}
+      className="dark:bg-gray-800 bg-white text-black dark:text-white text-lg pt-2 my-5 h-full overflow-auto"
+      defaultSelectedKeys={["AddCatagory"]}
+      // defaultOpenKeys={["sub1"]}
+      mode="inline"
+      items={items}
+    />
+  );
+};
 export default AdminSidebar;

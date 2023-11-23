@@ -23,8 +23,8 @@ function EditCatagory() {
   }, []);
   const filteredData = catagortyData.find((item) => item.id === id);
   return (
-    <div className="App h-[90vh] ">
-      <div className="flex h-full  ">
+    <div className="App h-[100vh] ">
+      <div className="flex h-[90vh] ">
         <div className="w-1/5  mt-20 pl-5 font-['Agbalumo'] ">
           <>
             <AdminSidebar />

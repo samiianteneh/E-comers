@@ -29,11 +29,11 @@ function App() {
         <div className="z-30 fixed w-full">
           <Header />
         </div>
-        <div className="dark:bg-gray-900 dark:text-white bg-slate-100 text-black sm:h-[100vh]  md:h-[100vh] h-[100vh] lg:h-full xl:h-full ">
+        <div className="dark:bg-gray-900 dark:text-white bg-slate-100 text-black  ">
           <Routes>
             {role === "admin" ? (
               <>
-                <Route path="/" element={<AdminHome />} />
+                <Route path="/AdminHome" element={<AdminHome />} />
                 <Route path="/ManageCatagory" element={<ManageCatagory />} />
                 <Route path="/EditCatagory/:id" element={<EditCatagory />} />
                 <Route path="/AddProduct" element={<AddProduct />} />

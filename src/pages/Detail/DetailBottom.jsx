@@ -1,26 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import BackButton from "../../components/layout/backButton";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { URLST } from "../../constants/urls";
+import Modal from "../../components/Modal/cartAddModal/Modal";
 
 function DetailBottom({ productId }) {
+  const [modal, setModal] = useState(false);
   const userId = localStorage.getItem("userID");
-  // console.log("productId :", productId);
-  // console.log("userId :", userId);
-  const navigate = useNavigate();
+  const page = "cartSuccess";
   const {
     handleSubmit,
     register,
     formState: { errors },
   } = useForm();
   const onSubmit = (data) => {
-    console.log({
-      productId: productId,
-      userId: userId,
-      Quantity: parseInt(data.Quantity),
-    });
     axios
       .post(`${URLST}/carts`, {
         productId: productId,
@@ -29,6 +24,7 @@ function DetailBottom({ productId }) {
       })
       .then((response) => {
         console.log("response : ", response);
+        setModal((prev) => !prev);
       })
       .catch((err) => {
         console.error(err);
@@ -36,6 +32,12 @@ function DetailBottom({ productId }) {
   };
   return (
     <div className="px-20 py-3 border-t-2 border-black flex justify-between">
+      <Modal
+        modal={modal}
+        page={page}
+        setModal={setModal}
+        toggleModal={() => setModal((prev) => !prev)}
+      />
       <button className="bg-red-600 rounded pl-3 pr-3 text-white">
         <BackButton />
       </button>

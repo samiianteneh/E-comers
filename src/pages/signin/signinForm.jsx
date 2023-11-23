@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 // import { useNavigate } from "react-router-dom";
 import { URLST } from "../../constants/urls";
 import axios from "axios";
-import { Spin } from "antd";
+import { Button, Spin } from "antd";
 
 function SigninForm() {
   const [loading, setLoading] = useState(false);
@@ -30,9 +30,12 @@ function SigninForm() {
         localStorage.setItem("name", Response.data.user.user.name);
         localStorage.setItem("role", Response.data.user.user.role.roleName);
         localStorage.setItem("userID", Response.data.user.user.id);
-        // navigate("/");
-
-        window.location.href = "/";
+        const role = localStorage.getItem("role");
+        if (role === "admin") {
+          window.location.href = "/AdminHome";
+        } else {
+          window.location.href = "/";
+        }
       })
       .catch((err) => {
         console.error(err);
@@ -51,7 +54,7 @@ function SigninForm() {
           </div>
           <div>
             <input
-              className="w-full h-8 pl-2 border-[1px] border-black rounded bg-white"
+              className="w-full h-8 pl-2 border-[1px] border-black rounded dark:text-black bg-white"
               type="text"
               id="email"
               placeholder="Type here"
@@ -98,10 +101,19 @@ function SigninForm() {
             >
               Log in
             </button>
+            {/* <Button
+              type="submit"
+              onClick={() => {
+                setLoading((prev) => !prev);
+              }}
+              className="px-4 py-2 text-white bg-blue-600 rounded"
+            >
+              Sign In
+            </Button> */}
           </div>
           <div className="flex justify-center">
             {" "}
-            {loading && <Spin loading={loading} />}
+            {loading && <Spin size="large" loading={loading} />}
           </div>
         </div>
       </form>

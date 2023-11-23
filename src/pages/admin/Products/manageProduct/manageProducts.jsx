@@ -46,8 +46,8 @@ function ManageProducts() {
   const slicedData = productData.slice(startIndex, endIndex);
 
   return (
-    <div className="App h-[90vh]">
-      <div className="flex h-full ">
+    <div className="App h-[100vh]">
+      <div className="flex h-[90vh] ">
         <div className="w-1/5  mt-20 pl-5 font-['Agbalumo'] ">
           <>
             <AdminSidebar />
@@ -59,7 +59,7 @@ function ManageProducts() {
               <InerHeader inerContent={"Products"} />
             </div>
             <div>
-              <div className="m-4 my-3 h-full ">
+              <div className="m-4 mt-3 h-full ">
                 <table className="table-fixed w-full">
                   <thead className="bg-gray-500 text-white dark:text-black">
                     <tr>
