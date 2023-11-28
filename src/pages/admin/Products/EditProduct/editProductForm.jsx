@@ -21,8 +21,11 @@ function EditProductForm({ title, description, image, price, id }) {
         image: data.image ? data.image[0] : undefined,
       })
       .then((response) => {
-        console.log("Response Data", response);
-        navigate("/ManageProducts");
+        // console.log("Response Data", response);
+        if (response.data) {
+          alert(response.data.msg);
+          navigate("/ManageProducts");
+        }
       })
       .catch((err) => {
         console.error(err);

@@ -1,12 +1,13 @@
 import React from "react";
 
 import {
-  ShoppingCartOutlined,
   HomeOutlined,
   PlusCircleOutlined,
   UnorderedListOutlined,
 } from "@ant-design/icons";
 import { LuPackageOpen } from "react-icons/lu";
+import { TbCategory } from "react-icons/tb";
+
 import { Menu } from "antd";
 import { useNavigate } from "react-router-dom";
 function getItem(label, key, icon, children, type) {
@@ -21,9 +22,9 @@ function getItem(label, key, icon, children, type) {
 const items = [
   getItem("Home", "AdminHome", <HomeOutlined />),
 
-  getItem("Cart", "sub1", <ShoppingCartOutlined />, [
-    getItem("View Cart", "ManageCatagory", <UnorderedListOutlined />),
-    getItem("Add Cart", "AddCatagory", <PlusCircleOutlined />),
+  getItem("category", "sub1", <TbCategory />, [
+    getItem("View category", "ManageCatagory", <UnorderedListOutlined />),
+    getItem("Add category", "AddCatagory", <PlusCircleOutlined />),
   ]),
   getItem("Product", "sub2", <LuPackageOpen />, [
     getItem("View Product", "ManageProducts", <UnorderedListOutlined />),
@@ -41,7 +42,7 @@ const AdminSidebar = () => {
   return (
     <Menu
       onClick={onClick}
-      className="dark:bg-gray-800 bg-white text-black dark:text-white text-lg pt-2 my-5 h-full overflow-auto"
+      className="dark:bg-gray-800 bg-white text-black dark:text-white text-lg pt-2 my-3 h-full overflow-auto"
       defaultSelectedKeys={["AddCatagory"]}
       // defaultOpenKeys={["sub1"]}
       mode="inline"

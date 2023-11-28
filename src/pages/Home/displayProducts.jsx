@@ -1,72 +1,34 @@
-import React, { useEffect, useState } from "react";
-import EachProduct from "./eachProduct";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { updateNo } from "../../components/layout/cartSlice";
 import axios from "axios";
 import { URLST } from "../../constants/urls";
 
-function DisplayProducts() {
-  const [productData, setProductData] = useState([]);
-  const itemsPerPage = 4;
-  const [currentPage, setCurrentPage] = useState(1);
+function DisplayProduct() {
+  const [cart, setCart] = useState([]);
+  const userId = localStorage.getItem("userID");
 
   useEffect(() => {
     axios
-      .get(`${URLST}/product`)
+      .get(`${URLST}/carts`)
       .then((response) => {
-        // console.log(response.data.product);
-        setProductData(response.data.product);
+        setCart(response.data.cart);
+        // console.log(response.data.cart);
       })
       .catch((err) => {
-        console.error("Error fetching product data:", err);
+        console.error("Error fetching cart data:", err);
       });
   }, []);
 
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const endIndex = startIndex + itemsPerPage;
-  const slicedData = productData.slice(startIndex, endIndex);
+  const filteredData = cart.filter((item) => item.cart.userId === userId);
 
-  const totalPages = Math.ceil(productData.length / itemsPerPage);
-  const pageNumbers = Array.from(
-    { length: totalPages },
-    (_, index) => index + 1
-  );
-
-  const handlePageChange = (pageNumber) => {
-    setCurrentPage(pageNumber);
-  };
-
-  return (
-    <>
-      <div className="grid lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-1   ">
-        {slicedData.map((product, index) => (
-          <div
-            key={index}
-            className=" bg-white dark:bg-gray-800 m-2 rounded-lg"
-          >
-            <EachProduct
-              title={product.productName}
-              image={product.image}
-              price={product.price}
-              id={product.id}
-            />
-          </div>
-        ))}
-      </div>
-      {/* Pagination */}
-      <div className="mx-16 flex justify-end">
-        {pageNumbers.map((pageNumber) => (
-          <button
-            key={pageNumber}
-            onClick={() => handlePageChange(pageNumber)}
-            className={
-              currentPage === pageNumber ? "active" : " text-blue-500 px-3"
-            }
-          >
-            {pageNumber}
-          </button>
-        ))}
-      </div>
-    </>
-  );
+  /////////////////////////
+  const dispatch = useDispatch();
+  const currentNo = useSelector((state) => state.cart.no);
+  useEffect(() => {
+    dispatch(updateNo(filteredData.length));
+  }, [filteredData.length, dispatch]);
+  // console.log(filteredData.length);
 }
 
-export default DisplayProducts;
+export default DisplayProduct;

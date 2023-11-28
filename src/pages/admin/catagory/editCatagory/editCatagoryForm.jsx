@@ -2,6 +2,7 @@ import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { URLST } from "../../../../constants/urls";
+import { connect } from "react-redux";
 
 function EditCatagoryForm({ description, categoryName }) {
   const { id } = useParams();
@@ -18,9 +19,13 @@ function EditCatagoryForm({ description, categoryName }) {
         categoryName: data.name,
         description: data.description,
       })
-      .then((response) => {
-        console.log("Response Data", response);
-        navigate("/ManageCart");
+      .then((Cart_edit_response) => {
+        // console.log("Cart edit Response", Cart_edit_response);
+        if (Cart_edit_response.data) {
+          alert("cart Successfully edited ");
+          navigate("/ManageCatagory");
+        }
+        // navigate("/ManageCart");
       })
       .catch((err) => {
         console.error(err);

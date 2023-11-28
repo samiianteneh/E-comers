@@ -16,6 +16,7 @@ function ManageProducts() {
       .get(`${URLST}/product`)
       .then((response) => {
         setProductData(response.data.product);
+        // console.log(response.data.product);
       })
       .catch((err) => {
         console.error("Error fetching product data:", err);
@@ -33,8 +34,14 @@ function ManageProducts() {
     axios
       .delete(`${URLST}/product/${productId}`)
       .then((response) => {
-        console.log("Deleted post with ID ", response);
-        window.location.replace("ManageProducts");
+        console.log("Deleted product with ID ", response);
+        // window.location.replace("ManageProducts");
+        const newProductData = productData.filter(
+          (item) => item.id !== productId
+        );
+        // console.log(newProductData, "inside a function");
+
+        setProductData(newProductData);
       })
       .catch((error) => {
         console.error(error);
@@ -74,19 +81,19 @@ function ManageProducts() {
                     </tr>
                   </thead>
                   <tbody>
-                    {slicedData.map((product) => (
+                    {slicedData.map((product, index) => (
                       <tr
                         key={product.id}
                         className="bg-white dark:bg-gray-800 m-2 rounded-lg"
                       >
                         <td className="border p-2 overflow-hidden">
-                          {product.id}
+                          {startIndex + index + 1}
                         </td>
                         <td className="border p-2 overflow-hidden">
                           {product.productName}
                         </td>
                         <td className="border p-2 overflow-hidden">
-                          {product.price}
+                          {parseInt(product.price)}
                         </td>
                         <td className="border p-2 ">
                           <img

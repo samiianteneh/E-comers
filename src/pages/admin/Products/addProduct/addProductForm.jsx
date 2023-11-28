@@ -1,14 +1,15 @@
 import axios from "axios";
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import { URLST } from "../../../../constants/urls";
 
 function AddProductForm() {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const {
     register,
     handleSubmit,
+    reset, // Add reset method from useForm
     formState: { errors },
   } = useForm();
 
@@ -27,14 +28,7 @@ function AddProductForm() {
     fetchCategories();
   }, []);
 
-  const onSubmit = (data) => {
-    // console.log({
-    //   productName: data.name,
-    //   price: data.price,
-    //   file: data.image,
-    //   description: data.Description,
-    //   categoryId: data.Category,
-    // });
+  const onSubmit = (data, e) => {
     axios
       .post(
         `${URLST}/product`,
@@ -53,9 +47,14 @@ function AddProductForm() {
         }
       )
       .then((response) => {
-        console.log("Response Data", response.data);
-        // console.log("Response message", response.data.message);
-        navigate("/ManageProducts");
+        // console.log("Response Data", response.data);
+        if (response.data) {
+          alert(response.data.msg);
+          // Reset the form fields using the reset method
+          reset();
+          // Redirect to the desired page on successful submission
+          // navigate("/AddCatagory");
+        }
       })
       .catch((err) => {
         console.error(err);
@@ -152,7 +151,7 @@ function AddProductForm() {
               {...register("Description", {
                 required: "Description is requierd",
                 pattern: {
-                  value: /^[A-Za-zÀ-ÖØ-öø-ÿ\s'-]+$/,
+                  value: /^[A-Za-zÀ-ÖØ-öø-ÿ\d\s'[\]-]+$/u,
                   message:
                     "Description should only contain letters, spaces, hyphens, and apostrophes.",
                 },

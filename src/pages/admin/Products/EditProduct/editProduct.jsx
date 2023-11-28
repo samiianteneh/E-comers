@@ -32,14 +32,14 @@ function EditProduct() {
           </>
         </div>
         <div className="w-4/5 mt-20 overflow-auto ">
-          <div className="   mx-10 mt-5 pt-5 dark:bg-gray-800 bg-white ">
+          <div className="   mx-10 my-5 pt-5 dark:bg-gray-800 bg-white h-full ">
             <InerHeader inerContent={"Edit Products"} />
             <div className="bg-gray-100 dark:bg-gray-800 m-4">
               {filteredData && (
                 <EditProductForm
                   title={filteredData.productName}
                   image={filteredData.image}
-                  price={filteredData.price}
+                  price={parseInt(filteredData.price)}
                   description={filteredData.description}
                   id={filteredData.id}
                 />

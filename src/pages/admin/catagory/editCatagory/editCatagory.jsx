@@ -33,11 +33,7 @@ function EditCatagory() {
         <div className="w-4/5 mt-20 overflow-auto">
           <div className="   mx-10 mt-5 pt-5 dark:bg-gray-800 bg-white h-full ">
             <InerHeader inerContent={"Edit Cart"} />
-            <div
-              className="
-       bg-gray-100  dark:bg-gray-800 m-4 
-      "
-            >
+            <div className="bg-gray-100  dark:bg-gray-800 m-4 ">
               <EditCatagoryForm
                 categoryName={filteredData?.categoryName}
                 description={filteredData?.description}

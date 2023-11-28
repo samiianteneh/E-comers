@@ -7,20 +7,24 @@ function AddCatagoryForm() {
   const navigate = useNavigate();
   const {
     register,
-    handleSubmit, // Correct property name
+    handleSubmit,
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
+  const onSubmit = (data, e) => {
     axios
       .post(`${URLST}/category`, {
         categoryName: data.name,
         description: data.Description,
       })
       .then((response) => {
-        console.log("Response Data", response.data);
+        // console.log("Response Data", response.data);
         if (response.data) {
-          navigate("/manageCart");
+          alert("Successfully created");
+          // Reset the form fields
+          e.target.reset();
+          // Redirect to the desired page on successful submission
+          // navigate("/AddCatagory");
         }
       })
       .catch((err) => {
@@ -31,21 +35,21 @@ function AddCatagoryForm() {
   return (
     <div className="flex justify-center">
       <form onSubmit={handleSubmit(onSubmit)} className="w-full px-10 py-5">
-        <div className=" py-2">
+        <div className="py-2">
           <div>
             <label>Title</label>
           </div>
-          <div className=" pt-2">
+          <div className="pt-2">
             <input
-              className="w-full h-10 pl-2 border-[1px] border-black rounded bg-white  dark:text-black"
+              className="w-full h-10 pl-2 border-[1px] border-black rounded bg-white dark:text-black"
               type="text"
               placeholder="Type here"
               id="name"
               {...register("name", {
                 required: "Name is required",
                 pattern: {
-                  value: /^[A-Za-zÀ-ÖØ-öø-ÿ\s'-]+$/,
-                  message: "Please enter a valid name with only letters.",
+                  value: /^[A-Za-z0-9\s\-'.!@#$%^&*()_+=<>?/\\";:{}|[\],`~]+$/,
+                  message: "Please enter a valid title.",
                 },
               })}
             />
@@ -54,22 +58,21 @@ function AddCatagoryForm() {
             )}
           </div>
         </div>
-        <div className=" py-2">
+        <div className="py-2">
           <div>
             <label>Description</label>
           </div>
           <div>
             <input
-              className="w-full h-10 pl-2 border-[1px] border-black rounded  dark:text-black bg-white"
+              className="w-full h-10 pl-2 border-[1px] border-black rounded dark:text-black bg-white"
               type="text"
               id="Description"
               placeholder="Type here"
               {...register("Description", {
-                required: "Description is requierd",
+                required: "Description is required",
                 pattern: {
-                  value: /^[A-Za-zÀ-ÖØ-öø-ÿ\s'-]+$/,
-                  message:
-                    "Description should only contain letters, spaces, hyphens, and apostrophes.",
+                  value: /^[A-Za-z0-9\s\-'.!@#$%^&*()_+=<>?/\\";:{}|[\],`~]+$/,
+                  message: "Please enter a valid description.",
                 },
               })}
             />

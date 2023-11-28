@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { Rate } from "antd";
 import { URLST } from "../../constants/urls";
 
 function DetailRightSide({ title, description, price, categoryId, ratting }) {
@@ -21,35 +22,35 @@ function DetailRightSide({ title, description, price, categoryId, ratting }) {
   //   console.log("filteredData category", filteredData, data);
   return (
     <div>
-      <div className=" py-5 text-black dark:text-white">
-        <span className=" font-bold text-gray-800 dark:text-gray-200  ">
+      <div className=" py-5 text-xl text-black dark:text-white">
+        <span className=" font-bold text-gray-800 dark:text-gray-200 font-[Kdam Thmor Pro]  ">
           TITLE :
         </span>{" "}
         {title}
       </div>
-      <div className=" py-5 text-black dark:text-white">
-        <span className=" font-bold text-gray-800 dark:text-gray-200 ">
+      <div className=" py-5 text-xl text-black dark:text-white">
+        <span className=" font-bold text-gray-800 dark:text-gray-200 font-[Kdam Thmor Pro] ">
           price:
         </span>{" "}
-        {price}
+        {parseInt(price)}
       </div>
-      <div className=" py-5 text-black dark:text-white">
-        <span className=" font-bold text-gray-800 dark:text-gray-200 ">
+      <div className=" py-5 text-xl text-black dark:text-white">
+        <span className=" font-bold text-gray-800 dark:text-gray-200 font-[Kdam Thmor Pro] ">
           category :{" "}
         </span>{" "}
         {filteredData?.categoryName}
       </div>
-      <div className=" py-5 text-black dark:text-white">
-        <span className=" font-bold text-gray-800 dark:text-gray-200 ">
+      <div className=" py-5 text-xl text-black dark:text-white">
+        <span className=" font-bold text-gray-800 dark:text-gray-200 font-[Kdam Thmor Pro] ">
           description :
         </span>
         {description}
       </div>
-      <div className=" py-5 text-black dark:text-white">
-        <span className=" font-bold text-gray-800 dark:text-gray-200 ">
-          ratting :{" "}
+      <div className=" py-5 text-xl text-black dark:text-white">
+        <span className=" font-bold text-gray-800 dark:text-gray-200 font-[Kdam Thmor Pro] ">
+          ratting :
         </span>
-        {ratting}
+        <Rate defaultValue={3} />
       </div>
     </div>
   );

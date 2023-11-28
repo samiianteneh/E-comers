@@ -14,8 +14,10 @@ function ManageCatagory() {
     axios
       .delete(`${URLST}/category/${categoryId}`)
       .then((response) => {
-        console.log("Deleted post with ID ", response);
-        window.location.replace("ManageCatagory");
+        const newCategoryData = categoryData.filter(
+          (item) => item.id !== categoryId
+        );
+        setCategoryData(newCategoryData);
       })
       .catch((error) => {
         console.error(error);
@@ -27,7 +29,6 @@ function ManageCatagory() {
       .get(`${URLST}/category`)
       .then((response) => {
         setCategoryData(response.data);
-        // console.log(response.data);
       })
       .catch((err) => {
         console.error("Error fetching category data:", err);
@@ -70,12 +71,12 @@ function ManageCatagory() {
                   </tr>
                 </thead>
                 <tbody className="bg-gray-300 dark:bg-gray-600">
-                  {slicedData.map((category) => (
+                  {slicedData.map((category, index) => (
                     <tr
                       key={category.id}
                       className="bg-white dark:bg-gray-800 m-2 rounded-lg"
                     >
-                      <td className="border p-2">{category.id}</td>
+                      <td className="border p-2">{startIndex + index + 1}</td>
                       <td className="border p-2">{category.categoryName}</td>
                       <td className="border p-2">{category.description}</td>
                       <td className="border p-2 ">

@@ -23,7 +23,7 @@ function DetailBottom({ productId }) {
         Quantity: parseInt(data.Quantity),
       })
       .then((response) => {
-        console.log("response : ", response);
+        // console.log("response : ", response);
         setModal((prev) => !prev);
       })
       .catch((err) => {
@@ -38,9 +38,9 @@ function DetailBottom({ productId }) {
         setModal={setModal}
         toggleModal={() => setModal((prev) => !prev)}
       />
-      <button className="bg-red-600 rounded pl-3 pr-3 text-white">
+      <div className="bg-red-600 rounded pl-3 pr-3 text-white">
         <BackButton />
-      </button>
+      </div>
       <form onSubmit={handleSubmit(onSubmit)} className="flex">
         <div className=" px-4">
           <div>

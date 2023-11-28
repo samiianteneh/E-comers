@@ -16,12 +16,14 @@ import Order from "./pages/order/order";
 import ManageCatagory from "./pages/admin/catagory/manageCatagory/manageCatagory";
 import EditCatagory from "./pages/admin/catagory/editCatagory/editCatagory";
 import AdminHome from "./pages/admin/adminhome/adminHome";
+import Number from "./components/layout/number";
+import Addres from "./pages/addres/addres";
 
 function App() {
   const tokens = localStorage.getItem("token");
   const name = localStorage.getItem("name");
   const role = localStorage.getItem("role");
-  console.log(role, "role");
+  // console.log("role", role);
 
   return (
     <Router>
@@ -48,7 +50,9 @@ function App() {
                   <>
                     <Route path="/detail/:id" element={<Detail />} />
                     <Route path="/cart" element={<Cart />} />
+                    <Route path="/Number" element={<Number />} />
                     <Route path="/order" element={<Order />} />
+                    <Route path="/Addres" element={<Addres />} />
                   </>
                 ) : (
                   <>
